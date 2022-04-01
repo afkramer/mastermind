@@ -5,5 +5,6 @@ class Player
   def initialize
     @name = nil
     @role = nil
+    @gui = Gui.new
   end
 end
