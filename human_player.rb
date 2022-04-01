@@ -5,7 +5,7 @@ require 'game_constants'
 
 # HumanPlayer contains functionality for a human player
 class HumanPlayer < Player
-  def choose_code
+  def get_guess
     code = nil
     while code.nil?
       input = gui.get_code

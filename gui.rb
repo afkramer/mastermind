@@ -6,8 +6,8 @@ class Gui
     puts 'Welcome to Mastermind!'
   end
 
-  def get_code(player_name)
-    puts "#{player_name} please enter the code to be broken."
+  def get_guess(player_name)
+    puts "#{player_name}, please enter your guess."
     puts 'Please enter any combination of r, g, b, y, separated by spaces.'
     gets.chomp
   end
