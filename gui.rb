@@ -17,6 +17,16 @@ class Gui
     puts "Let's get started!"
   end
 
+  def get_human_name
+    print 'Please enter your name: '
+    gets.chomp
+  end
+
+  def get_computer_name
+    print 'Please give your computer opponent a name: '
+    gets.chomp
+  end
+
   def get_guess(player_name)
     puts "#{player_name}, please enter your guess."
     puts 'Please enter any combination of r, g, b, y, p or w separated by spaces.'
