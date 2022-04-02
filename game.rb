@@ -1,35 +1,35 @@
 # game.rb
 
+require './gui'
+require './computer_player'
+require './human_player'
+require './board'
+
+# Game contains code to create players, set up the board, and run the game
 class Game
-
   def initialize
-    @codebreaker # Either a human_player or computer_player object
-    @codemaker # Same as above
-    @board  # Keeps track of the guesses and feedback about the moves
-    @gui
+    @codebreaker = HumanPlayer.new
+    @codemaker = ComputerPlayer.new
+    @board = Board.new
+    @gui = Gui.new
   end
-
-  # TODO (in second version, when computer can also break the code)
-  # Decide how many rounds to play (TODO when computer AI has been established)
-  # Get players (TODO when computer to be included)
 
   def play
     start_game
-    get_code
-    process_guesses
+    set_up_board
+    guess_results = process_guesses
+    end_game(guess_results)
   end
 
   def start_game
-    # Display instructions for how to play the game
-      # Colorized 'O' characters will be used to represent code pegs
-      # red and white 'o' characters will be used to represent key pegs
-      # Colorizer gem
-    # Get human player's name
-    # Set up codebreaker as human_player
-    # Set up codemaker as computer_player
-    # Set up the board (maybe as a hash with the guess number as the key and then a further hash as the value with array for the codepegs and array for keypegs)
-    # Have the computer choose the code to be guessed
-    
+    gui.display_introduction
+    @codebreaker.set_name
+    @codemaker.set_name
+  end
+
+  def set_up_board
+    master_code = @codemaker.choose_code
+    @board.add_master_code
   end
 
   def process_guesses
@@ -40,17 +40,16 @@ class Game
       board.add_keys(keys)
       gui.display_board(@board)
       if keys.all? { |peg| peg == 'r' }
-        return "won"
-        break
+        return guess_count
       end
     end
   end
 
   def end_game(guesses_results)
-    if guesses_results = 'won'
-      gui.display_game_won(@codebreaker.name, guess_count)
+    if guesses_results.nil?
+      gui.display_game_lost(@codebreaker.name)
     else
-      gui.display_game_lost(@codebreaker.name, guess_count)
+      gui.display_game_won(@codebreaker.name, guesses_results)
     end
   end
 end

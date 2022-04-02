@@ -14,27 +14,30 @@ class Board
   attr_reader :codepegs, :keypegs
 
   def initialize
+    @master_code = []
     @codepegs = []
     @keypegs = []
   end
 
+  def add_master_code(code)
+    @master_code = code
+  end
+  
   def add_guess(guess_array)
-    guess_array.map! do |peg|
-      add_code_color(peg)
-    end
-
-    @codepegs.push(guess_array)
+    @codepegs.push(convert_array_to_color(guess_array))
   end
 
   def add_keys(key_array)
-    key_array.map! do |peg|
-      add_key_color(peg)
-    end
-
-    @keypegs.push(key_array)
+    @keypegs.push(convert_array_to_color(key_array))
   end
 
-  def add_code_color(peg)
+  def convert_array_to_color(array)
+    array.map! do |peg|
+      add_peg_color(peg)
+    end
+  end
+
+  def add_peg_color(peg)
     case peg
     when 'r'
       '(@)'.colorize(:red)
@@ -48,14 +51,9 @@ class Board
       '(@)'.colorize(:light_magenta)
     when 'w'
       '(@)'.colorize(:white)
-    end
-  end
-
-  def add_key_color(peg)
-    case peg
-    when 'r'
+    when 'kr'
       'o'.colorize(:light_red)
-    when 'w'
+    when 'kw'
       'o'.colorize(:light_white)
     end
   end

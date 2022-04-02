@@ -6,6 +6,9 @@ require './player'
 class ComputerPlayer < Player
   include GameConstants
 
+  def set_name
+  end
+
   def choose_code
     4.times { @master_code.push(GameConstants::COLORS.sample) }
     @master_code
@@ -21,7 +24,7 @@ class ComputerPlayer < Player
 
     guess_array.each_with_index do |peg, index|
       if master_copy[index] == peg
-        keypeg_array.push('r')
+        keypeg_array.push('kr')
         guess_array[index] = 'x'
         master_copy[index] = 'x'
         puts "Find exact copies -- index #{index} peg #{peg}"
@@ -36,7 +39,7 @@ class ComputerPlayer < Player
       master_index = peg == 'x' ? nil : master_copy.find_index(peg)
       puts "master_index = #{master_index}"
       if master_index
-        keypeg_array.push('w')
+        keypeg_array.push('kw')
         master_copy[master_index] = 'x'
         puts "keypeg_array: #{keypeg_array}"
         puts "master_copy: #{master_copy}"

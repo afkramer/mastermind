@@ -2,7 +2,7 @@
 
 # Gui contains functionality to make the game work in the command line
 class Gui
-  def show_introduction
+  def display_introduction
     puts 'Welcome to Mastermind!'
   end
 
