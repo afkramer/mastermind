@@ -37,13 +37,17 @@ class Board
   def add_code_color(peg)
     case peg
     when 'r'
-      'O'.colorize(:red)
+      '(@)'.colorize(:red)
     when 'b'
-      'O'.colorize(:light_cyan)
+      '(@)'.colorize(:light_cyan)
     when 'g'
-      'O'.colorize(:green)
+      '(@)'.colorize(:green)
     when 'y'
-      'O'.colorize(:yellow)
+      '(@)'.colorize(:yellow)
+    when 'p'
+      '(@)'.colorize(:light_magenta)
+    when 'w'
+      '(@)'.colorize(:white)
     end
   end
 
