@@ -15,4 +15,8 @@ class Gui
   def input_not_allowed
     puts "That input isn't allowed. Please try again."
   end
+
+  def display_game_won(name, guess)
+    puts "Congratulations, #{name}! You won on guess #{guess}"
+  end
 end

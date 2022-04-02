@@ -16,7 +16,7 @@ class ComputerPlayer < Player
   end
 
   def rate_guess(guess_array)
-    master_copy = @master_code
+    master_copy = @master_code.clone
     keypeg_array = []
 
     guess_array.each_with_index do |peg, index|
@@ -24,31 +24,25 @@ class ComputerPlayer < Player
         keypeg_array.push('r')
         guess_array[index] = 'x'
         master_copy[index] = 'x'
+        puts "Find exact copies -- index #{index} peg #{peg}"
+        puts "guess_array: #{guess_array}"
+        puts "master_copy: #{master_copy}"
+        puts "master_code: #{@master_code}"
       end
     end
 
     guess_array.each_with_index do |peg, index|
+      puts "Find color matches -- index #{index} peg #{peg}"
       master_index = peg == 'x' ? nil : master_copy.find_index(peg)
+      puts "master_index = #{master_index}"
       if master_index
         keypeg_array.push('w')
         master_copy[master_index] = 'x'
+        puts "keypeg_array: #{keypeg_array}"
+        puts "master_copy: #{master_copy}"
+        puts "master_code: #{@master_code}"
       end
     end
     keypeg_array
   end
-
-  def rate_exact_pegs!(guess_array, master_copy)
-    # Loop through once to find all pegs that are exact
-  end
-
-  def rate_correct_colors!(guess_array, master_copy)
-    # Loop through a second time to see how many are just close
-  end
 end
-
-player = ComputerPlayer.new
-player.choose_code
-player.show_code
-puts "Guess 1: #{player.rate_guess(%w[r g b y])}"
-puts "Guess 2: #{player.rate_guess(%w[g b y y])}"
-puts "Guess 3: #{player.rate_guess(%w[b b r r])}"

@@ -33,18 +33,24 @@ class Game
   end
 
   def process_guesses
-    # Display the empty board? Or do I want to keep adding rows instead of showing the whole board at once?
-    # Start guessing (1..5).for_each?
-      # Incrememt the guesses -> player only gets 10 guesses
-      # if guess_count = 11
-        # end game
-        # break
-      # codebreaker enters a guess
-      board.add_guess(@codebreaker.get_guess(@codebreaker.name))
-      # store the guess in the board
-      # codemaker provides feedback with keypegs
-      # display codepegs and keypegs
-      # if the code has been guessed, display winning text
-    # end guessing loop
+    (1..10).each do |guess_count|
+      guess = @codebreaker.get_guess
+      @board.add_guess(guess)
+      keys = @codemaker.rate_guess(guess)
+      board.add_keys(keys)
+      gui.display_board(@board)
+      if keys.all? { |peg| peg == 'r' }
+        return "won"
+        break
+      end
+    end
+  end
+
+  def end_game(guesses_results)
+    if guesses_results = 'won'
+      gui.display_game_won(@codebreaker.name, guess_count)
+    else
+      gui.display_game_lost(@codebreaker.name, guess_count)
+    end
   end
 end

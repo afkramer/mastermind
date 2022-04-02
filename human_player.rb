@@ -8,7 +8,7 @@ class HumanPlayer < Player
   def get_guess
     code = nil
     while code.nil?
-      input = gui.get_code
+      input = gui.get_guess(@name)
       input = input.split(' ')
       if input.all? { |peg| GameConstants::COLORS.include?(peg) }
         code = input
