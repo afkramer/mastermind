@@ -20,7 +20,7 @@ class Board
   end
 
   def add_master_code(code)
-    @master_code = code
+    @master_code = convert_array_to_color(code)
   end
   
   def add_guess(guess_array)

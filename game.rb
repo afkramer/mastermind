@@ -29,19 +29,18 @@ class Game
 
   def set_up_board
     master_code = @codemaker.choose_code
-    @board.add_master_code
+    @board.add_master_code(master_code)
   end
 
+  # Returns guess count if game won, returns nil if no more guesses left
   def process_guesses
     (1..10).each do |guess_count|
       guess = @codebreaker.get_guess
       @board.add_guess(guess)
       keys = @codemaker.rate_guess(guess)
-      board.add_keys(keys)
+      @board.add_keys(keys)
       gui.display_board(@board)
-      if keys.all? { |peg| peg == 'r' }
-        return guess_count
-      end
+      return guess_count if keys.all? { |peg| peg == 'kr' }
     end
   end
 

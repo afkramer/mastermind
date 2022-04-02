@@ -16,7 +16,24 @@ class Gui
     puts "That input isn't allowed. Please try again."
   end
 
+  def display_board(codepegs, keypegs, *master_code)
+    codepegs.each_with_index do |row, index|
+      puts "#{row.join('  ')}  ||  #{keypegs[index].nil? ? nil : keypegs[index].join(' ')}"
+    end
+    puts
+    if master_code == []
+      puts ' ?    ?    ?    ?'
+    else
+      puts master_code.join('  ')
+    end
+    puts
+  end
+
   def display_game_won(name, guess)
     puts "Congratulations, #{name}! You won on guess #{guess}"
+  end
+
+  def display_game_lost(name)
+    puts "Sorry, you didn't crack the code in time #{name}. Better luck next time!"
   end
 end
