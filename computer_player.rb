@@ -28,7 +28,7 @@ class ComputerPlayer < Player
       end
     end
 
-    guess_array.each_with_index do |peg, index|
+    guess_array.each do |peg|
       master_index = peg == 'x' ? nil : master_copy.find_index(peg)
       if master_index
         keypeg_array.push('kw')
