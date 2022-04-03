@@ -1,5 +1,7 @@
 # computer_player.rb
 
+# TEST
+
 require './game_constants'
 require './player'
 
