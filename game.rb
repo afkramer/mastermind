@@ -31,24 +31,28 @@ class Game
     @board.add_master_code(@codemaker.choose_code)
   end
 
-  # Returns guess count if game won, returns nil if no more guesses left
   def process_guesses
-    (1..10).each do |guess_count|
+    guess_count = 0
+    13.times do
+      guess_count += 1
+      break if guess_count == 13
+
       guess = @codebreaker.get_guess
       @board.add_guess(guess)
       keys = @codemaker.rate_guess(guess)
       @board.add_keys(keys)
       @gui.display_board(@board.codepegs, @board.keypegs)
-      return guess_count if keys.all? { |peg| peg == 'kr' }
+      break if keys.all? { |peg| peg == 'kr' } && keys.length == 4
     end
+    guess_count
   end
 
-  def end_game(guesses_results)
-    if guesses_results.nil?
-      @gui.display_game_lost(@codebreaker.name)
+  def end_game(guess_results)
+    if guess_results < 13
+      @gui.display_game_won(@codebreaker.name, guess_results)
     else
-      @gui.display_game_won(@codebreaker.name, guesses_results)
+      @gui.display_game_lost(@codebreaker.name, @codemaker.name)
     end
-    @gui.display_board(@board.codepegs, @board.keypegs, @codemaker.master_code)
+    @gui.display_board(@board.codepegs, @board.keypegs, @board.master_code)
   end
 end

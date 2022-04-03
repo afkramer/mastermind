@@ -11,7 +11,7 @@ require 'colorize'
 # Board holds guess and key arrays to be displayed in GUI
 # Colorize is used to add color to the pegs
 class Board
-  attr_reader :codepegs, :keypegs
+  attr_reader :codepegs, :keypegs, :master_code
 
   def initialize
     @master_code = []
@@ -32,7 +32,7 @@ class Board
   end
 
   def convert_array_to_color(array)
-    array.map! do |peg|
+    array.map do |peg|
       add_peg_color(peg)
     end
   end
@@ -44,9 +44,9 @@ class Board
     when 'b'
       '(@)'.colorize(:light_cyan)
     when 'g'
-      '(@)'.colorize(:green)
+      '(@)'.colorize(:light_green)
     when 'y'
-      '(@)'.colorize(:yellow)
+      '(@)'.colorize(:light_yellow)
     when 'p'
       '(@)'.colorize(:light_magenta)
     when 'w'

@@ -6,3 +6,5 @@ def main
   game = Game.new
   game.play
 end
+
+main

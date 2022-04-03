@@ -8,7 +8,7 @@ class ComputerPlayer < Player
   include GameConstants
 
   def set_name
-    @name = gui.get_computer_name
+    @name = @gui.get_computer_name
   end
 
   def choose_code
@@ -18,17 +18,18 @@ class ComputerPlayer < Player
 
   def rate_guess(guess_array)
     master_copy = @master_code.clone
+    guess_copy = guess_array.clone
     keypeg_array = []
 
-    guess_array.each_with_index do |peg, index|
+    guess_copy.each_with_index do |peg, index|
       if master_copy[index] == peg
         keypeg_array.push('kr')
-        guess_array[index] = 'x'
+        guess_copy[index] = 'x'
         master_copy[index] = 'x'
       end
     end
 
-    guess_array.each do |peg|
+    guess_copy.each do |peg|
       master_index = peg == 'x' ? nil : master_copy.find_index(peg)
       if master_index
         keypeg_array.push('kw')
