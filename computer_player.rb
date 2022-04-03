@@ -23,8 +23,8 @@ class ComputerPlayer < Player
     @master_code
   end
 
-  def rate_guess(master_array, guess_array)
-    master_copy = @master_code.clone
+  def rate_guess(guess_array, master_array = @master_code)
+    master_copy = master_array.clone
     guess_copy = guess_array.clone
     keypeg_array = []
 
@@ -59,10 +59,8 @@ class ComputerPlayer < Player
   end
 
   def initialize_possible_guesses_better
-    # GameConstants::COLORS.permutation(4) { |perm| @possible_guesses.push(perm) }
     colors_to_permutate = []
     GameConstants::COLORS.cycle(4) { |color| colors_to_permutate.push(color) }
-    p colors_to_permutate.sort
     colors_to_permutate.sort.permutation(4) { |perm| @possible_guesses.push(perm) }
     @possible_guesses.uniq!
   end
