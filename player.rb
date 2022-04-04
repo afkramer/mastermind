@@ -8,6 +8,7 @@ class Player
 
   def initialize
     @name = nil
+    @opponent_name = nil
     @gui = Gui.new
     @master_code = []
   end

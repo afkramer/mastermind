@@ -28,6 +28,8 @@ class Game
     set_up_players
     @codebreaker.set_name
     @codemaker.set_name
+    @codebreaker.opponent_name = @codemaker.name
+    @codemaker.opponent_name = @codebreaker.name
   end
 
   def set_up_players
@@ -36,6 +38,7 @@ class Game
       # No action needed. Game is initialized for this case
     when 'n'
       @codebreaker, @codemaker = @codemaker, @codebreaker
+      @codebreaker.initialize_possible_guesses
     else
       @gui.input_not_allowed
       set_up_players
@@ -48,11 +51,13 @@ class Game
 
   def process_guesses
     guess_count = 0
+    prev_guess = []
+    prev_keypegs = []
     13.times do
       guess_count += 1
       break if guess_count == 13
 
-      guess = @codebreaker.get_guess
+      guess = @codebreaker.get_guess(guess_count, prev_guess, prev_keypegs)
       @board.add_guess(guess)
       keys = @codemaker.rate_guess(guess)
       @board.add_keys(keys)

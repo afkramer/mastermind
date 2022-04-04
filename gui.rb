@@ -48,6 +48,12 @@ class Gui
     gets.chomp
   end
 
+  def get_code(player_name, opponent_name)
+    puts
+    puts "#{player_name}, please choose a code for #{opponent_name} to crack."
+    print 'Use any combination of r, g, b, y, p or w separated by spaces: '
+  end
+
   def input_not_allowed
     puts
     puts "That input isn't allowed. Please try again."

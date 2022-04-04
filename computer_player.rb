@@ -30,12 +30,13 @@ class ComputerPlayer < Player
     @possible_guesses.uniq!
   end
 
-  def guess(guess_num, prev_guess = [], keypegs = [])
+  def get_guess(guess_num, prev_guess, keypegs)
     if guess_num == 1
       %w[r r g g]
     else
       @possible_guesses = @possible_guesses.select do |guess_array|
         new_keypegs = rate_guess(guess_array, prev_guess)
+        sleep 2
         keypegs == new_keypegs
       end
     end
