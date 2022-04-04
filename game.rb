@@ -7,6 +7,8 @@ require './board'
 
 # Game contains code to create players, set up the board, and run the game
 class Game
+  attr_reader :codebreaker, :codemaker   # DELETE AFTER DEBUGGING
+
   def initialize
     @codebreaker = HumanPlayer.new
     @codemaker = ComputerPlayer.new
@@ -23,8 +25,21 @@ class Game
 
   def start_game
     @gui.display_introduction
+    set_up_players
     @codebreaker.set_name
     @codemaker.set_name
+  end
+
+  def set_up_players
+    case @gui.wish_to_be_codebreaker
+    when 'y'
+      # No action needed. Game is initialized for this case
+    when 'n'
+      @codebreaker, @codemaker = @codemaker, @codebreaker
+    else
+      @gui.input_not_allowed
+      set_up_players
+    end
   end
 
   def set_up_board
@@ -56,3 +71,8 @@ class Game
     @gui.display_board(@board.codepegs, @board.keypegs, @board.master_code)
   end
 end
+
+game = Game.new
+game.start_game
+puts game.codebreaker.name
+puts game.codemaker.name

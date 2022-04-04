@@ -24,6 +24,12 @@ class Gui
     puts
   end
 
+  def wish_to_be_codebreaker
+    puts
+    print 'Do you wish to be the codebreaker (y/n): '
+    gets.chomp
+  end
+
   def get_human_name
     puts
     print 'Please enter your name: '
