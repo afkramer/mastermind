@@ -36,9 +36,10 @@ class ComputerPlayer < Player
     else
       @possible_guesses = @possible_guesses.select do |guess_array|
         new_keypegs = rate_guess(guess_array, prev_guess)
-        sleep 2
         keypegs == new_keypegs
       end
+      sleep 5
+      @possible_guesses[0]
     end
   end
 end

@@ -61,6 +61,8 @@ class Game
       @board.add_guess(guess)
       keys = @codemaker.rate_guess(guess)
       @board.add_keys(keys)
+      prev_guess = guess
+      prev_keypegs = keys
       @gui.display_board(@board.codepegs, @board.keypegs)
       break if keys.all? { |peg| peg == 'kr' } && keys.length == 4
     end
@@ -76,11 +78,3 @@ class Game
     @gui.display_board(@board.codepegs, @board.keypegs, @board.master_code)
   end
 end
-
-game = Game.new
-game.start_game
-puts game.codebreaker.name
-puts game.codemaker.name
-game.set_up_board
-p game.codemaker.master_code
-p game.board.master_code
