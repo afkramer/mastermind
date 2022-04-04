@@ -7,7 +7,7 @@ require './board'
 
 # Game contains code to create players, set up the board, and run the game
 class Game
-  attr_reader :codebreaker, :codemaker   # DELETE AFTER DEBUGGING
+  attr_reader :codebreaker, :codemaker, :board   # DELETE AFTER DEBUGGING
 
   def initialize
     @codebreaker = HumanPlayer.new
@@ -81,3 +81,6 @@ game = Game.new
 game.start_game
 puts game.codebreaker.name
 puts game.codemaker.name
+game.set_up_board
+p game.codemaker.master_code
+p game.board.master_code

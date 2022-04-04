@@ -12,6 +12,7 @@ class HumanPlayer < Player
   def choose_code
     input = get_code('master_code')
     if code_ok?(input)
+      @master_code = input
       input
     else
       @gui.input_not_allowed
@@ -25,7 +26,7 @@ class HumanPlayer < Player
       input
     else
       @gui.input_not_allowed
-      choose_code
+      get_guess
     end
   end
 

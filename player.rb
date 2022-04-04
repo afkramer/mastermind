@@ -5,6 +5,7 @@ require './gui'
 # Player is the superclass for human_player and computer_player
 class Player
   attr_reader :name, :master_code
+  attr_writer :opponent_name
 
   def initialize
     @name = nil
