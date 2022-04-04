@@ -1,6 +1,9 @@
 # mastermind
 My solution to the Mastermind project in the Ruby path of The Odin Project. It is possible for the human player to be either codemaker or codebreaker.
 
+The game can be played in replit:
+https://replit.com/@afkramer/Mastermind?v=1
+
 ## Implementation notes
 
 In case the computer is the codebreaker, I decided to go with the Swaszek strategy. I was able to understand this strategy the best, as I could picture how to create an array with all possible guesses and then reduce that array based on keypegs from previous guesses.
