@@ -12,13 +12,17 @@ class Gui
     puts 'In this version, blank spots are not allowed.'
     puts
     puts 'The codebreaker must then try to crack the code using 12 guesses or less.'
-    puts 'Please enter any combination of r, g, b, y, p or w separated by spaces.'
+    puts 'Each guess should be any combination of r, g, b, y, p or w separated by spaces.'
     puts
-    puts "Don't worry: the codemaker must give you feedback on how well you guessed."
-    puts 'The codemaker will set key pegs to indicate the following:'
+    puts "Don't worry: the codebreaker receives feedback on each guess,"
+    puts 'which can then be used to come up with the next guess.'
     puts
+    puts 'Feedback is given in the form of key pegs, which indicate the following:'
     puts 'Red peg -> Exact match. Both color and position are correct.'
     puts 'White peg -> Color match. Only the color of the peg is correct.'
+    puts
+    puts 'The computer always takes care of evaluating guesses by setting the keypegs,'
+    puts "but don't worry it can't cheat! :) "
     puts
     puts "Let's get started!"
     puts
@@ -46,6 +50,11 @@ class Gui
     puts
     print "#{player_name}, please enter your guess: "
     gets.chomp
+  end
+
+  def computer_thinking(name)
+    puts
+    puts "#{name} is thinking..."
   end
 
   def get_code(player_name, opponent_name)
@@ -79,7 +88,6 @@ class Gui
   def display_game_won(name, guess)
     puts
     puts "Congratulations, #{name}! You won on guess #{guess}."
-    puts 'Here is the final board:'
     puts
   end
 
@@ -87,8 +95,6 @@ class Gui
     puts
     puts "Sorry, you didn't crack the code in time, #{name}."
     puts "Looks like #{computer_name}'s code was too difficult! Better luck next time!"
-    puts
-    puts 'Here is the final board and the master code:'
     puts
   end
 end

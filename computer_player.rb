@@ -31,6 +31,9 @@ class ComputerPlayer < Player
   end
 
   def get_guess(guess_num, prev_guess, keypegs)
+    sleep 0.5
+    @gui.computer_thinking(@name)
+    sleep 4
     if guess_num == 1
       %w[r r g g]
     else
@@ -38,7 +41,6 @@ class ComputerPlayer < Player
         new_keypegs = rate_guess(guess_array, prev_guess)
         keypegs == new_keypegs
       end
-      sleep 5
       @possible_guesses[0]
     end
   end

@@ -57,7 +57,6 @@ class Game
       guess_count += 1
       break if guess_count == 13
 
-      display_board if guess_count > 1
       guess = @codebreaker.get_guess(guess_count, prev_guess, prev_keypegs)
       @board.add_guess(guess)
       keys = @codemaker.rate_guess(guess)
@@ -65,12 +64,14 @@ class Game
       prev_guess = guess
       prev_keypegs = keys
       break if keys.all? { |peg| peg == 'kr' } && keys.length == 4
+
+      display_board
     end
     guess_count
   end
 
   def display_board
-    if @codebreaker.class == ComputerPlayer
+    if @codebreaker.instance_of?(ComputerPlayer)
       @gui.display_board(@board.codepegs, @board.keypegs, @board.master_code)
     else
       @gui.display_board(@board.codepegs, @board.keypegs)
@@ -78,11 +79,11 @@ class Game
   end
 
   def end_game(guess_results)
+    @gui.display_board(@board.codepegs, @board.keypegs, @board.master_code)
     if guess_results < 13
       @gui.display_game_won(@codebreaker.name, guess_results)
     else
       @gui.display_game_lost(@codebreaker.name, @codemaker.name)
     end
-    @gui.display_board(@board.codepegs, @board.keypegs, @board.master_code)
   end
 end
